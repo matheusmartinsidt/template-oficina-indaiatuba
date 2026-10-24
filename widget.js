@@ -63,7 +63,7 @@
   .enviar { background: var(--cor); color: #fff; border: 0; border-radius: 10px; padding: 0 14px; font-weight: 600; cursor: pointer; font-size: 14px; }
   .enviar:disabled { opacity: .5; cursor: default; }
   .rodape { font-size: 11px; color: #8a8a85; text-align: center; padding: 0 10px 8px; background: #fff; }
-  @media (max-width: 480px) {
+  @media (max-width: 480px), (max-height: 600px) {
     .painel { right: 0; bottom: 0; width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; }
   }
   @media (prefers-reduced-motion: reduce) { .fab { transition: none; } .digitando i { animation: none; } }
