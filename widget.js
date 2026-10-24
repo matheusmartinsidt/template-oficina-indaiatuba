@@ -1,12 +1,13 @@
 /*
- * Widget de chat do Atendimento IA. Para instalar em qualquer site, uma linha antes de </body>:
+ * Widget de chat do Prosa (powered by WhiteFox). Para instalar em qualquer site, uma linha antes de </body>:
  *
  *   <script src="widget.js" defer
  *     data-api="https://SEU-BACKEND/webhook"   (endereço dos webhooks)
  *     data-cliente="torque-indaiatuba"          (chave do cliente em config/clientes.json)
  *     data-titulo="Torque Auto Center"          (opcional)
  *     data-saudacao="Olá! Como posso ajudar?"   (opcional)
- *     data-cor="#b9412e"></script>              (opcional; padrão: a variável CSS --accent do site)
+ *     data-cor="#b9412e"                        (opcional; padrão: a variável CSS --accent do site)
+ *     data-assinatura="nao"></script>           (opcional; esconde "Prosa · powered by WhiteFox")
  */
 (() => {
   const tag = document.currentScript;
@@ -63,6 +64,8 @@
   .enviar { background: var(--cor); color: #fff; border: 0; border-radius: 10px; padding: 0 14px; font-weight: 600; cursor: pointer; font-size: 14px; }
   .enviar:disabled { opacity: .5; cursor: default; }
   .rodape { font-size: 11px; color: #8a8a85; text-align: center; padding: 0 10px 8px; background: #fff; }
+  .rodape a { color: inherit; text-decoration: none; }
+  .rodape a:hover b { color: var(--cor); }
   @media (max-width: 480px), (max-height: 600px) {
     .painel { right: 0; bottom: 0; width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; }
   }
@@ -77,12 +80,13 @@
   <div class="msgs" aria-live="polite"></div>
   <form><input type="text" maxlength="1000" placeholder="Escreva sua mensagem" aria-label="Mensagem" autocomplete="off" required>
     <button class="enviar" type="submit">Enviar</button></form>
-  <div class="rodape">Respostas geradas por IA. Não envie dados sensíveis.</div>
+  <div class="rodape">Respostas geradas por IA. Não envie dados sensíveis.<span class="assinatura"> · <a href="https://whitefox.com.br" target="_blank" rel="noopener">Prosa · powered by <b>WhiteFox</b></a></span></div>
 </section>`;
 
   const $ = (s) => root.querySelector(s);
   const fab = $('.fab'), painel = $('.painel'), msgs = $('.msgs'), form = $('form'), input = $('input'), enviarBtn = $('.enviar');
   $('.topo strong').textContent = TITULO;
+  if (opt.assinatura === 'nao') $('.assinatura').remove();
   const aplicarCor = () => host.style.setProperty('--cor', corDoSite());
   aplicarCor();
 
